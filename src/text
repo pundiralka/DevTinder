@@ -9,3 +9,59 @@
 - what are dependencies
 - what is the use of -g  after npm install
 - difference between caret and tilda
+
+- initialize git -> git init
+- .gitignore
+- create a remote repo on github
+- push all code to remote origin
+- play with route and route extension ex. hello, /,hello/2, hello/xyz
+- order of the route matter alot
+- install postman app and create workspace/ collection -> for api calls
+- write a logic to handle GET, POST,DELETE, PUT api call and test them on postman
+- Explore routing and use of ?,+,(),* in the routes
+- use of regex in routes /a/,/.*fly$/
+- Reading the query paramsin the routes
+- Reading the dynamic routes in the routes
+
+| Symbol | Meaning                                 | Example     | Matches               |
+| ------ | --------------------------------------- | ----------- | --------------------- |
+| `?`    | Optional (0 or 1) of the preceding char | `/colou?r`  | `/color`, `/colour`   |
+| `+`    | One or more of the preceding char       | `/go+gle`   | `/google`, `/gooogle` |
+| `*`    | Wildcard (matches any chars)            | `/ab*cd`    | `/abcd`, `/ab123cd`   |
+| `()`   | Grouping / Optional group               | `/item(s)?` | `/item`, `/items`     |
+
+
+-multiple route handlers - play with the code
+-next()
+-next function and errors along with the res.send()
+-app.use("/route",rH,[rH1,rH2, rH3 ]);
+-what is middleware
+-How express js basically handles the request behind the scene
+-Difference between app.use and app.all
+app.use:
+Used to register middleware that applies to all HTTP methods (GET, POST, PUT, etc.) at a given path (and its subpaths).
+app.all
+Used to handle all HTTP methods (GET, POST, etc.) at an exact route.
+
+Feature	               app.use()	                     app.all()
+Matches all methods	   ✅ Yes	                        ✅ Yes
+Path matching	       ✅ Prefix match (e.g. /api/*)	    ❌ Exact only (e.g. /api)
+Sub-paths	           ✅ Yes	                        ❌ No
+Use case	          Middleware (logging, auth, etc.)	         Catch-all route handler
+Can send response?	    ❌ Not typically (but can)	     ✅ Yes
+
+-what is middleware and why we need it
+Middleware is a function that gets access to the request (req), response (res), and the next function (next) in the cycle of handling a request.
+Middleware lets you hook into the request-response cycle and do things before the final response is sent.
+Middleware is:
+
+A function that runs before your final response.
+
+Used to process, protect, or modify requests/responses.
+
+Essential to build clean, modular, and secure Express apps.
+
+-write a dummy auth middleware for admin
+-write a dummy auth middleware for all the user routes, except /user/login
+-error handling using app.use("/",(err,res,req,next)={});
+and it is used at the end of code
