@@ -1,93 +1,90 @@
 const express= require("express");
-const {adminAuth,userAuth}= require("./middlewares/Auth")
+const connectDB = require("./config/database");
+const User= require("./model/user");
 const app = express();
-// this will match all the http method api calls to test
-// app.use("/test",(req,res)=>{
-//     res.send("dev tinder project");
-// })
-// this will handle get call to user
-
-// DYNAMIC ROUTE
-// app.get('/abc/:userId/:name',(req,res)=>{
-//     console.log(req.params);
-//     res.send({"firstname": "alka", "lastname":"pundir"})
-// });
-
-// app.get("/user",(req,res)=>{
-//     res.send({"firstname": "alka", "lastname":"pundir"})
-// });
-// app.post("/user",(req,res)=>{
-//     res.send("data is successfully saved in db")
-// });
-// app.delete("/user",(req,res)=>{
-//     res.send("data is successfuly deleted")
-// });
-
-//Multiple route handlers - play with the code
-// app.use("/route",(req,res,next)=>{
-//     console.log("route handler 1")
-//         next();
-//     //res.send("response 1 !!")
-
-// },[(req,res,next)=>{
-//     console.log("route handler 2")
-//     next();
-//     //res.send("response 2 !!")
-// },(req,res,next)=>{
-//     console.log("route handler 3")
-//     //res.send("response 3 !!")
-//     next();
-// },(req,res,next)=>{
-//     console.log("route handler 4")
-//     res.send("response 4 !!")
-//     next();
-   // There is no third middleware, so next() goes nowhere.
-//Express just silently drops the next() and finishes the request.
-//}])
-// app.use("/route",(req,res,next)=>{
-//     console.log("route handler 2")
-//     next();
-//     //res.send("response 2 !!")
-// })
-// app.use("/route",(req,res,next)=>{
-//     console.log("route handler 3")
-//     //res.send("response 3 !!")
-//     next();
-// })
-// app.use("/route",(req,res,next)=>{
-//     console.log("route handler 4")
-//     res.send("response 4 !!")
-//     next();
-// })
-
-//middleware authentication
 
 
-// app.use("/admin",adminAuth)
-// app.get("/admin/userdata",(req,res,next)=>{
+app.use(express.json());
+// add data for the user
+app.post("/signup",async(req,res)=>{
+    //creating new instance in the User model
+   const user = new User(req.body);
+   try {
+    await user.save();
+    res.send("user data is sucessfully added!!")
     
-//     res.send("data is successfully send")
-// })
-// app.get("/admin/userdelete",(req,res,next)=>{
+   } catch (error) {
+     res.status(400).send("error saving the user"+error?.message);
     
-//     res.send("data is successfully send1")
-// })
-
-// error handling
-app.get("/user/data",( req, res)=>{
-    try{
-       throw new error("xyz");
-       res.send("data");
-
-    }catch(err){
-        res.status(500).send("contact to our support team")
-
-    }
+   }
 })
-app.use("/",(err,req,res,next)=>{
-    if(err){
-    res.status(500).send("something went wrong");
+//GETTING THE LIST OF ALL USER
+app.get("/feed",async(req,res)=>{
+  const users = await User.find();
+  try{
+    if(!users){
+    res.status(400).send("record is not found")
+  }else{
+    res.send(users);
+  }
+  }catch(err){
+    res.status(400).send(err.message);
 
-    }})
+  }
 
-app.listen("3000");
+})
+//GETTING THE LIST OF GIVEN EMAIL
+app.get("/user",async(req,res)=>{
+   const email = req.body.emailID;
+   try{
+    const users = await User.find({emailID: email})
+    if(!users){
+      res.status(400).send("record is not found");
+    }else{
+      res.send(users);
+    }
+
+   }catch(error){
+    res.status(400).send(error.message);
+
+   }
+})
+//delete the data from the database
+app.delete("/user",async(req,res)=>{
+  try{
+    const userId = req.body.userId;
+     await User.findByIdAndDelete(userId);
+     res.send("User is successfully deleted from the database")
+
+  }catch(error){
+    res.status(400).send(error);
+  }
+
+})
+//update the user from the database
+app.patch("/user",async(req,res)=>{
+  const userId = req.body.userId;
+  const updateData = req.body;
+  try{
+    await User.findByIdAndUpdate({_id: userId},updateData);
+    res.send("user is sucessfully updated")
+
+  }catch(error){
+    res.status(400).send(error);
+  }
+
+
+})
+
+
+connectDB().then(()=>{
+    console.log("database is successfully connected")
+    app.listen(3000,()=>{
+        console.log("server is successfully listening on port 2000")
+    });
+}).catch((err)=>{
+  console.log("database cannot be connected")
+});
+
+
+

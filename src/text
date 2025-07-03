@@ -65,3 +65,23 @@ Essential to build clean, modular, and secure Express apps.
 -write a dummy auth middleware for all the user routes, except /user/login
 -error handling using app.use("/",(err,res,req,next)={});
 and it is used at the end of code
+-create a free cluster on mongodb official website(Mongo atlas)
+-install mongoose library
+-connect your application to the database "connection-url/devTinder"
+-call the connectDB function and connect the database before starting the application on 3000
+-create a user schema and user Model
+-create POST/signup using API to add data to the database
+-push some documents by api call from postman
+-error handling using try and catch
+-what is the difference between json and javascript object
+-Add the express.json middleware to your app
+-make your signup api dynamic to receive data from the end user
+-User.findOne with dulplicate email ids, which object returned
+-API- get user by email
+-API- feed api - GET/FEED- get all the data from the user database
+-API- get user by id
+-create delete user api
+-diffrence between patch and put
+-api- update a user
+-Explore the mongoose documentation for Model methods
+-what are the options in a Model.findOneAndUpdate method, and explore about it.
