@@ -85,3 +85,64 @@ and it is used at the end of code
 -api- update a user
 -Explore the mongoose documentation for Model methods
 -what are the options in a Model.findOneAndUpdate method, and explore about it.
+🟢 MongoDB
+MongoDB is a NoSQL database. It stores data in a flexible, JSON-like format called BSON (Binary JSON).
+
+✅ Key Features:
+Document-based (instead of tables and rows like SQL).
+
+Schema-less (you can store different structures in the same collection).
+
+Fast and scalable.
+
+Uses collections and documents:
+
+Collection = like a table in SQL.
+
+Document = like a row, but stored as a JSON object.
+
+🟣 Mongoose
+Mongoose is an Object Data Modeling (ODM) library for Node.js and MongoDB.
+
+✅ What Mongoose Does:
+Provides a schema-based structure for your MongoDB documents.
+
+Allows you to define models, validations, methods, and hooks.
+
+Translates JavaScript objects into MongoDB documents and vice versa.
+
+🔄 Mongoose and MongoDB Relationship:
+MongoDB is the database.
+
+Mongoose is the tool/library that helps you interact with it in a structured way.
+
+🧠 Analogy:
+Think of MongoDB as a warehouse full of unorganized goods (data), and Mongoose as a manager that:
+
+Labels shelves (schemas)
+
+Ensures correct packaging (validation)
+
+Helps move data in/out cleanly (models & queries)
+
+-Explore schemaType options from the documentation
+-add require, unique,lowercase, min,maxLength, trim
+-Add default value
+-Create a custom validator function for gender
+-Improve the db schema - PUT all appropriate validtaions on each field in schema
+-add API level validation on Patch request and signup api validation
+-install validator
+-Explore validator library function and use validator function for password, email and photo url;
+-never trust req.body
+-validate data in signup api
+-install bcrypt package
+-create passwordHash using bcrypt.hash and save the user is excrupted password
+-create login api 
+-compare passwords and throw new errors if email and password is invalid
+
+-install the cookie-parse
+-just send a dummy cookie to user
+-create get/profile api just check if you get the cookie back
+-install jasonwebtoken
+-In login api, after email and passowrd validation, create a jwt token and send it to user in
+-read the cookie inside your profile api and find the logged in user
