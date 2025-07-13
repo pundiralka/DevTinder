@@ -146,3 +146,8 @@ Helps move data in/out cleanly (models & queries)
 -install jasonwebtoken
 -In login api, after email and passowrd validation, create a jwt token and send it to user in
 -read the cookie inside your profile api and find the logged in user
+-Auth Middleware
+-add the userAuth middleware in profile api and a new sendConnection request Api
+-set the expire of jwt token  and cookies to 7 days
+-create userSchema method to getJWT()
+-create userSchema method to comparepassword(passwordInput)
