@@ -151,3 +151,15 @@ Helps move data in/out cleanly (models & queries)
 -set the expire of jwt token  and cookies to 7 days
 -create userSchema method to getJWT()
 -create userSchema method to comparepassword(passwordInput)
+
+-explore tinder api
+-create a list of all api you can think of dev tinder
+-group multiple routes under respective routes
+-read documentation for express.Router
+-create route folder for managing auth, profile and request route
+-create authRouter, profileRouter,requestRouter
+-Import these routers in app.js
+-create POST/logout api
+-create PATCH/profile/edit
+-create PATCH/profile/password API => forgot password api
+-make you validate all your data in every POST and Patch please 
